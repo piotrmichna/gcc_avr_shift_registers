@@ -9,6 +9,9 @@
 #ifndef PMSR_PMSR_H_
 #define PMSR_PMSR_H_
 
+#define SR_EN 1		// dostepne sterowanie linia CE rejestru
+#define SR_PWR 1	// dostepne sterowanie linia zasilania rejestru
+#define SR_LED 1	// dostepna kotrolka pracy rejestru
 typedef struct{
 	volatile uint8_t *PORTX;
 	uint8_t MASK;
@@ -18,13 +21,13 @@ typedef struct{
 	TIO ser;
 	TIO sck;
 	TIO rck;
-#ifdef OSR0_EN_PIN
+#ifdef SR_EN
 	TIO en;
 #endif
-#ifdef OSR0_PWR_PIN
+#ifdef SR_PWR
 	TIO pwr;
 #endif
-#ifdef OSR0_LED_PIN
+#ifdef SR_LED
 	TIO led;
 #endif
 	uint8_t *pin_buf;
