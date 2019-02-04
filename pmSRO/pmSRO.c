@@ -21,7 +21,7 @@ void sroInit(void);
 uint8_t sroSetBit(uint8_t bit, uint8_t state){
 	uint8_t byte;
 	byte=bit/8;
-	if(byte>=sro.num) return 0;
+	if(byte>=sro.num || !sro.pin_buf) return 0;
 
 	bit-=(byte*8);
 	if (state) sro.pin_buf[byte] |=(1<<bit); else sro.pin_buf[byte] &=~(1<<bit);
@@ -29,14 +29,16 @@ uint8_t sroSetBit(uint8_t bit, uint8_t state){
 }
 
 uint8_t sroSetByte(uint8_t byte, uint8_t val){
-	if(byte>=sro.num) return 0;
+	if(byte>=sro.num || !sro.pin_buf) return 0;
 	sro.pin_buf[byte]=val;
 	return 1;
 }
 
 void sroResBuf(void){
-	for (uint8_t i=0;i<sro.num;i++){
-		sro.pin_buf[i]=0;
+	if(sro.pin_buf){
+		for (uint8_t i=0;i<sro.num;i++){
+			sro.pin_buf[i]=0;
+		}
 	}
 }
 
