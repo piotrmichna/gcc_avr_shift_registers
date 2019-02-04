@@ -43,9 +43,10 @@
 #endif
 
 
-void sroInit(void);
+
 uint8_t sroSetBit(uint8_t bit, uint8_t state);
 uint8_t sroSetByte(uint8_t byte, uint8_t val);
 void sroResBuf(void);
+void sroEvent(void);
 
 #endif /* PMSRO_PMSRO_H_ */
