@@ -27,7 +27,7 @@ uint8_t srSetPwr(TSR *sr){
 		status++;
 		return 0;
 	}else{
-		if(status<1) {
+		if(status<3) {
 			status++;
 			return 0;
 		}else{
