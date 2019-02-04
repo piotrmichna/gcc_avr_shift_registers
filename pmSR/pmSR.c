@@ -11,9 +11,15 @@
 
 #include "pmSR.h"
 
+uint8_t getIO(TIO *io);
+
 void setIO(TIO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TIO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
+uint8_t getIO(TIO *io){
+	uint8_t pin;
 
+	return pin;
+}
 
 #ifdef SR_PWR
 uint8_t srSetPwr(TSR *sr){
