@@ -42,6 +42,10 @@ void sroResBuf(void){
 	}
 }
 
+void sroSend(void){
+	sro.new_dat=1;
+}
+
 void sroEvent(void){
 	if(!sro.pin_buf){
 		sroInit();
