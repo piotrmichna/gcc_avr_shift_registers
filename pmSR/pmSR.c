@@ -37,6 +37,17 @@ uint8_t srSetPwr(TSR *sr){
 		}
 	}
 }
+void srResPwr(TSR *sr){
+	static uint8_t status;
+	if(status) {
+		#ifdef SR_PWR_ON_BIT
+			if(sr->pwr_on) resIO(&sr->pwr); else setIO(&sr->pwr);
+		#else
+			resIO(&sr->pwr);
+		#endif
+		status=0;
+	}
+}
 #endif
 #ifdef SR_LED
 void srSetLed(TSR *sr){
@@ -44,6 +55,13 @@ void srSetLed(TSR *sr){
 		if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
 	#else
 		setIO(&sr->led);
+	#endif
+}
+void srResLed(TSR *sr){
+	#ifdef SR_LED_ON_BIT
+		if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
+	#else
+		resIO(&sr->led);
 	#endif
 }
 #endif

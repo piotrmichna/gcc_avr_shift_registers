@@ -66,6 +66,7 @@ void resIO(TIO *io);
 
 #ifdef SR_PWR
 uint8_t srSetPwr(TSR *sr);
+void srResPwr(TSR *sr);
 #endif
 #ifdef SR_LED
 void srSetLed(TSR *sr);
