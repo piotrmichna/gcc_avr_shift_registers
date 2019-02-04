@@ -17,8 +17,30 @@ void resIO(TIO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
 void srInit(TSR *sr){
 }
 
+#ifdef SR_PWR
+uint8_t srSetPwr(TSR *sr){
+	static uint8_t status;
+	if(!status) {
+		#ifdef SR_PWR_ON_BIT
+			if(sr->pwr_on) setIO(sr->pwr); else resIO(sr->pwr);
+		#else
+			setIO(sr->pwr);
+		#endif
+		status++;
+		return 0;
+	}else{
+		if(status<1) {
+			status++;
+			return 0;
+		}else{
+			return status;
+		}
+	}
+}
+#endif
 void srSend(TSR *sr){
 	if(sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
+
 		uint8_t *reg;
 		uint8_t pin;
 
