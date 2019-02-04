@@ -11,7 +11,16 @@
 
 #define SR_EN 1		// dostepne sterowanie linia CE rejestru
 #define SR_PWR 1	// dostepne sterowanie linia zasilania rejestru
+#ifdef SR_PWR
+#define SR_PWR_ON	0	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
+#endif
+
 #define SR_LED 1	// dostepna kotrolka pracy rejestru
+#ifdef SR_LED
+#define SR_LED_ON	0	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
+#endif
+
+
 typedef struct{
 	volatile uint8_t *PORTX;
 	uint8_t MASK;
@@ -29,6 +38,19 @@ typedef struct{
 #endif
 #ifdef SR_LED
 	TIO led;
+#endif
+#ifdef SR_PWR_ON
+	uint8_t pwr_on	:1;	// stan wlaczanie diody led
+#endif
+#ifdef SR_LED_ON
+	uint8_t led_on	:1;	// stan wlaczania zasilania rejestru
+#endif
+#ifdef SR_PWR_ON
+	uint8_t 		:0;	// dope³nienie bitow do pelnego bajtu
+#else
+#ifdef SR_LED_ON
+	uint8_t 		:0;	// dope³nienie bitow do pelnego bajtu
+#endif
 #endif
 	uint8_t *pin_buf;
 	uint8_t num		:4;	// ilosc rejestrow
