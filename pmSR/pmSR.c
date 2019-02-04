@@ -6,17 +6,11 @@
  *		e-mail: poczta@piotrmichna.pl
  */
 
-<<<<<<< HEAD
-
-=======
->>>>>>> lib_pmSR
 #include <avr/io.h>
 #include "../mac.h"
 
 #include "pmSR.h"
 
-<<<<<<< HEAD
-=======
 void setIO(TIO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TIO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
 
@@ -104,4 +98,4 @@ void srSend(TSR *sr){
 		resIO(&sr->rck);
 	}
 }
->>>>>>> lib_pmSR
+

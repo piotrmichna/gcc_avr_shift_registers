@@ -9,9 +9,6 @@
 #ifndef PMSR_PMSR_H_
 #define PMSR_PMSR_H_
 
-<<<<<<< HEAD
-
-=======
 #define SR_EN 1		// dostepne sterowanie linia CE rejestru
 #define SR_PWR 1	// dostepne sterowanie linia zasilania rejestru
 #ifdef SR_PWR
@@ -77,6 +74,6 @@ void srResLed(TSR *sr);
 #endif
 
 void srSend(TSR *sr);
->>>>>>> lib_pmSR
+
 
 #endif /* PMSR_PMSR_H_ */
