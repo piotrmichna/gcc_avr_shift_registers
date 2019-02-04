@@ -7,7 +7,9 @@
  */
 #include <avr/io.h>
 #include "../mac.h"
-#include "pmSRO.h"
+#include "pmSRI.h"
 
 #include "../pmSR/pmSR.h"
 
+TSR sri;
+uint8_t sri0_pin_buf[ISR0_REG_NUM];
