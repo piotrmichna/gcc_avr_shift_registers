@@ -43,7 +43,22 @@ void sroResBuf(void){
 }
 
 void sroEvent(void){
-	if(!sro.pin_buf) sroInit();
+	if(!sro.pin_buf){
+		sroInit();
+		return;
+	}
+	if(sro.new_dat){
+		if(!sro.enable){
+			#ifdef SR_PWR
+				if( !srSetPwr(&sro) ) return;
+			#endif
+			#ifdef SR_EN
+				resIO(&sro.en);
+			#endif
+			sro.enable=1;
+		}
+		srSend(&sro);
+	}
 
 }
 
