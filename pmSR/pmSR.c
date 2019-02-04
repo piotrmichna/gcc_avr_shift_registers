@@ -23,7 +23,7 @@ int8_t getIO(TPI *io){
 
 #ifdef SR_PWR
 uint8_t srSetPwr(TSR *sr){
-	if(sr->pwr){
+	if(sr->pwr.PORTX){
 		static uint8_t status;
 		if(!status) {
 			#ifdef SR_PWR_ON_BIT
@@ -46,7 +46,7 @@ uint8_t srSetPwr(TSR *sr){
 	}
 }
 void srResPwr(TSR *sr){
-	if(sr->pwr){
+	if(sr->pwr.PORTX){
 		static uint8_t status;
 		if(status) {
 			#ifdef SR_PWR_ON_BIT
@@ -69,7 +69,7 @@ void srResPwr(TSR *sr){
 
 #ifdef SR_LED
 void srSetLed(TSR *sr){
-	if(sr->led){
+	if(sr->led.PORTX){
 		#ifdef SR_LED_ON_BIT
 			if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
 		#else
@@ -78,7 +78,7 @@ void srSetLed(TSR *sr){
 	}
 }
 void srResLed(TSR *sr){
-	if(sr->led){
+	if(sr->led.PORTX){
 		#ifdef SR_LED_ON_BIT
 			if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
 		#else
