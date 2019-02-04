@@ -11,14 +11,14 @@
 
 #include "pmSR.h"
 
-uint8_t getIO(TPI *io);
+int8_t getIO(TPI *io);
 
 void setIO(TPO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TPO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
 
 int8_t getIO(TPI *io){
 	if(!io->PINX) return -1;
-	if(io->PINX & io->MASK) return 1; else return 0;
+	if( (*io->PINX & io->MASK) ) return 1; else return 0;
 }
 
 #ifdef SR_PWR
@@ -106,9 +106,11 @@ void srSend(TSR *sr){
 }
 
 void srGet(TSR *sr){
-	if(!sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
+	if(!sr->sr_typ && sr->seri.PINX && sr->sck.PORTX && sr->rck.PORTX){
 		uint8_t *reg;
 		uint8_t pin;
+		int8_t x;
+
 
 		setIO(&sr->rck);
 		resIO(&sr->rck);
@@ -117,11 +119,15 @@ void srGet(TSR *sr){
 		for(uint8_t i=0;i<sr->num;i++){
 			if(sr->dir) pin=0x80; else pin=0x01;
 			while(pin){
-
+				x=getIO(&sr->seri);
+				if(x==-1) return;
+				if( sr->on_bit==x ) *reg |= (1<<pin); else *reg &= ~(1<<pin);
+				setIO(&sr->sck);
+				resIO(&sr->sck);
+				if(sr->dir) pin>>=1; else pin<<=1;
 			}
+			reg++;
 		}
-
 	}
-
 }
 
