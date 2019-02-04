@@ -39,6 +39,8 @@ typedef struct{
 }TSR;
 
 void setIO(TIO *io);
+void resIO(TIO *io);
+
 void srInit(TSR *sr);
 
 #endif /* PMSR_PMSR_H_ */
