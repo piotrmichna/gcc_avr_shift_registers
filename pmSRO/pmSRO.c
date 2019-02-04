@@ -44,6 +44,7 @@ void sroResBuf(void){
 
 void sroEvent(void){
 	if(!sro.pin_buf) sroInit();
+
 }
 
 void sroInit(void){

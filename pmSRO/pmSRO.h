@@ -11,7 +11,7 @@
 
 #include "../pmSR/srDef.h"
 
-#define OSR0_REG_NUM 1
+#define OSR0_REG_NUM 1		// 1...7 ilosc obslugiwanych rejestrow przesownych
 #define OSR0_ON_BIT_STATE 1
 #define OSR0_DIR_0_7 0		// kierunek wsuwania bitow
 
