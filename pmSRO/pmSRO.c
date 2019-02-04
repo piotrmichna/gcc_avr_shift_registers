@@ -33,23 +33,37 @@ void sroInit(void){
 	sro.rck.PORTX= &PORT(OSR0_RCK_PORT);
 	sro.rck.MASK= (1<<OSR0_RCK_PIN);
 
-#ifdef SR_EN
-	sro.en.PORTX= &PORT(OSR0_EN_PORT);
-	sro.en.MASK= (1<<OSR0_EN_PIN);
-#endif
-#ifdef SR_PWR
-	sro.pwr.PORTX= &PORT(OSR0_PWR_PORT);
-	sro.pwr.MASK= (1<<OSR0_PWR_PIN);
-	#ifdef SR_PWR_ON_BIT
-		sro.pwr_on=SR_PWR_ON_BIT;
+	#ifdef SR_EN
+		sro.en.PORTX= &PORT(OSR0_EN_PORT);
+		sro.en.MASK= (1<<OSR0_EN_PIN);
+		DDR(OSR0_EN_PORT) |= (1<<OSR0_EN_PIN);
+		PORT(OSR0_EN_PORT) |= (1<<OSR0_EN_PIN);
 	#endif
-#endif
-#ifdef SR_LED
-	sro.led.PORTX= &PORT(OSR0_LED_PORT);
-	sro.led.MASK= (1<<OSR0_LED_PIN);
-	#ifdef SR_LED_ON_BIT
-		sro.led_on=SR_LED_ON_BIT;
-	#endif
-#endif
+	#ifdef SR_PWR
+		sro.pwr.PORTX= &PORT(OSR0_PWR_PORT);
+		sro.pwr.MASK= (1<<OSR0_PWR_PIN);
+		DDR(OSR0_PWR_PORT) |= (1<<OSR0_PWR_PIN);
 
+		#ifdef SR_PWR_ON_BIT
+			sro.pwr_on=SR_PWR_ON_BIT;
+			if(SR_PWR_ON_BIT) PORT(OSR0_PWR_PORT) &= ~(1<<OSR0_PWR_PIN); else PORT(OSR0_PWR_PORT) |= (1<<OSR0_PWR_PIN);
+		#endif
+	#endif
+	#ifdef SR_LED
+		sro.led.PORTX= &PORT(OSR0_LED_PORT);
+		sro.led.MASK= (1<<OSR0_LED_PIN);
+		DDR(OSR0_LED_PORT) |= (1<<OSR0_LED_PIN);
+		#ifdef SR_LED_ON_BIT
+			sro.led_on=SR_LED_ON_BIT;
+			if(SR_PWR_ON_BIT) PORT(OSR0_LED_PORT) &= ~(1<<OSR0_LED_PIN); else PORT(OSR0_LED_PORT) |= (1<<OSR0_LED_PIN);
+		#endif
+	#endif
+
+	if(sro.sr_typ) DDR(OSR0_SER_PORT) |= (1<<OSR0_SER_PIN); else DDR(OSR0_SER_PORT) &= ~(1<<OSR0_SER_PIN);
+	DDR(OSR0_SCK_PORT) |= (1<<OSR0_SCK_PIN);
+	DDR(OSR0_RCK_PORT) |= (1<<OSR0_RCK_PIN);
+
+	if(sro.on_bit) PORT(OSR0_SER_PORT) &= ~(1<<OSR0_SER_PIN); else PORT(OSR0_SER_PORT) |= (1<<OSR0_SER_PIN);
+	PORT(OSR0_SCK_PORT) &= ~(1<<OSR0_SCK_PIN);
+	PORT(OSR0_RCK_PORT) &= ~(1<<OSR0_RCK_PIN);
 }
