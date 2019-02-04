@@ -44,7 +44,8 @@ typedef struct{
 #endif
 #endif
 	uint8_t *pin_buf;
-	uint8_t num		:4;	// ilosc rejestrow
+	uint8_t num		:3;	// ilosc rejestrow
+	uint8_t new_dat	:1;	// nowe dane do wyslania lub nowe dane pobrane
 	uint8_t sr_typ	:1;	// 1=rejestr wyjsciowy 0=rejestr wejsciowy
 	uint8_t dir		:1;	// kierunek wsuwania bitow
 	uint8_t on_bit	:1;	// bit wlaczany 0 lub 1
