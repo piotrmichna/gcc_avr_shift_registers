@@ -24,6 +24,7 @@ typedef struct{
 
 typedef struct{
 	TPO ser;
+	TPI seri;
 	TPO sck;
 	TPO rck;
 #ifdef SR_EN
