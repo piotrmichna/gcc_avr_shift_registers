@@ -9,7 +9,7 @@
 #ifndef PMSR_PMSR_H_
 #define PMSR_PMSR_H_
 
-
+#include "srDef.h"
 
 
 typedef struct{
