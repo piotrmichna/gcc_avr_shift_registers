@@ -42,6 +42,6 @@
 	#define ISR0_EN_PORT C
 #endif
 
-uint8_t sriGetByte(void);
+uint8_t sriGetByte(uint8_t id);
 
 #endif /* PMSRI_PMSRI_H_ */
