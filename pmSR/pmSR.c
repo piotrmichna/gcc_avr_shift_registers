@@ -14,8 +14,6 @@
 void setIO(TIO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TIO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
 
-void srInit(TSR *sr){
-}
 
 #ifdef SR_PWR
 uint8_t srSetPwr(TSR *sr){
@@ -73,9 +71,6 @@ void srResLed(TSR *sr){
 }
 #endif
 
-void srInit(TSR *sr){
-
-}
 void srSend(TSR *sr){
 	if(sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
 
