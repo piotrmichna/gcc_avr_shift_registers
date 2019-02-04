@@ -8,3 +8,9 @@
 
 #include <avr/io.h>
 #include "mac.h"
+
+#include "pmSR.h"
+
+void srInit(TSR *sr){
+
+}
