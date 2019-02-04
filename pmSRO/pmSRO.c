@@ -15,4 +15,6 @@
 
 TSR osr;
 
+void sroInit(void){
 
+}

@@ -42,5 +42,6 @@
 #endif
 
 
+void sroInit(void);
 
 #endif /* PMSRO_PMSRO_H_ */
