@@ -18,6 +18,11 @@ typedef struct{
 }TPO;
 
 typedef struct{
+	volatile uint8_t *PINX;
+	uint8_t MASK;
+}TPI;
+
+typedef struct{
 	TPO ser;
 	TPO sck;
 	TPO rck;
