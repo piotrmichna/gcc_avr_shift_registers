@@ -59,7 +59,6 @@ void sroEvent(void){
 		}
 		srSend(&sro);
 	}
-
 }
 
 void sroInit(void){
