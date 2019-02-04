@@ -15,20 +15,26 @@
 typedef struct{
 	volatile uint8_t *PORTX;
 	uint8_t MASK;
-}TIO;
+}TPO;
 
 typedef struct{
-	TIO ser;
-	TIO sck;
-	TIO rck;
+	volatile uint8_t *PINX;
+	uint8_t MASK;
+}TPI;
+
+typedef struct{
+	TPO ser;
+	TPI seri;
+	TPO sck;
+	TPO rck;
 #ifdef SR_EN
-	TIO en;
+	TPO en;
 #endif
 #ifdef SR_PWR
-	TIO pwr;
+	TPO pwr;
 #endif
 #ifdef SR_LED
-	TIO led;
+	TPO led;
 #endif
 #ifdef SR_PWR_ON_BIT
 	uint8_t pwr_on	:1;	// stan wlaczanie diody led
@@ -52,8 +58,8 @@ typedef struct{
 	uint8_t enable 	:1;	// 0=wylaczony 1= aktywny
 }TSR;
 
-void setIO(TIO *io);
-void resIO(TIO *io);
+void setIO(TPO *io);
+void resIO(TPO *io);
 
 
 #ifdef SR_PWR
@@ -66,6 +72,7 @@ void srResLed(TSR *sr);
 #endif
 
 void srSend(TSR *sr);
+void srGet(TSR *sr);
 
 
 #endif /* PMSR_PMSR_H_ */
