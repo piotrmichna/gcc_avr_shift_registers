@@ -72,6 +72,10 @@ void srResLed(TSR *sr){
 	#endif
 }
 #endif
+
+void srInit(TSR *sr){
+
+}
 void srSend(TSR *sr){
 	if(sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
 
