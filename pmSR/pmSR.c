@@ -23,57 +23,68 @@ int8_t getIO(TPI *io){
 
 #ifdef SR_PWR
 uint8_t srSetPwr(TSR *sr){
-	static uint8_t status;
-	if(!status) {
-		#ifdef SR_PWR_ON_BIT
-			if(sr->pwr_on) setIO(&sr->pwr); else resIO(&sr->pwr);
-		#else
-			setIO(&sr->pwr);
-		#endif
-		status++;
-		return 0;
-	}else{
-		if(status<5) {
+	if(sr->pwr){
+		static uint8_t status;
+		if(!status) {
+			#ifdef SR_PWR_ON_BIT
+				if(sr->pwr_on) setIO(&sr->pwr); else resIO(&sr->pwr);
+			#else
+				setIO(&sr->pwr);
+			#endif
 			status++;
 			return 0;
 		}else{
-			return status;
+			if(status<5) {
+				status++;
+				return 0;
+			}else{
+				return status;
+			}
 		}
+	}else{
+		return 1;
 	}
 }
 void srResPwr(TSR *sr){
-	static uint8_t status;
-	if(status) {
-		#ifdef SR_PWR_ON_BIT
-			if(sr->pwr_on) resIO(&sr->pwr); else setIO(&sr->pwr);
-		#else
-			resIO(&sr->pwr);
-		#endif
-		#ifdef SR_LED
-			#ifdef SR_LED_ON_BIT
-				if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
+	if(sr->pwr){
+		static uint8_t status;
+		if(status) {
+			#ifdef SR_PWR_ON_BIT
+				if(sr->pwr_on) resIO(&sr->pwr); else setIO(&sr->pwr);
 			#else
-				resIO(&sr->led);
+				resIO(&sr->pwr);
 			#endif
-		#endif
-		status=0;
+			#ifdef SR_LED
+				#ifdef SR_LED_ON_BIT
+					if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
+				#else
+					resIO(&sr->led);
+				#endif
+			#endif
+			status=0;
+		}
 	}
 }
 #endif
+
 #ifdef SR_LED
 void srSetLed(TSR *sr){
-	#ifdef SR_LED_ON_BIT
-		if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
-	#else
-		setIO(&sr->led);
-	#endif
+	if(sr->led){
+		#ifdef SR_LED_ON_BIT
+			if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
+		#else
+			setIO(&sr->led);
+		#endif
+	}
 }
 void srResLed(TSR *sr){
-	#ifdef SR_LED_ON_BIT
-		if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
-	#else
-		resIO(&sr->led);
-	#endif
+	if(sr->led){
+		#ifdef SR_LED_ON_BIT
+			if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
+		#else
+			resIO(&sr->led);
+		#endif
+	}
 }
 #endif
 
