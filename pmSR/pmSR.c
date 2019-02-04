@@ -33,19 +33,20 @@ uint8_t srSetPwr(TSR *sr){
 			status++;
 			return 0;
 		}else{
-			#ifdef SR_LED
-				#ifdef SR_LED_ON_BIT
-					if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
-				#else
-					setIO(&sr->led);
-				#endif
-			#endif
 			return status;
 		}
 	}
 }
 #endif
-
+#ifdef SR_LED
+void srSetLed(TSR *sr){
+	#ifdef SR_LED_ON_BIT
+		if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
+	#else
+		setIO(&sr->led);
+	#endif
+}
+#endif
 void srSend(TSR *sr){
 	if(sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
 

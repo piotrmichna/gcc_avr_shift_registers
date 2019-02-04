@@ -63,9 +63,13 @@ typedef struct{
 void setIO(TIO *io);
 void resIO(TIO *io);
 
-void srInit(TSR *sr);
+
 #ifdef SR_PWR
 uint8_t srSetPwr(TSR *sr);
+#endif
+#ifdef SR_LED
+void srSetLed(TSR *sr);
+void srResLed(TSR *sr);
 #endif
 
 void srSend(TSR *sr);
