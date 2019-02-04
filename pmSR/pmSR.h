@@ -65,4 +65,6 @@ void resIO(TIO *io);
 
 void srInit(TSR *sr);
 
+void srSend(TSR *sr);
+
 #endif /* PMSR_PMSR_H_ */

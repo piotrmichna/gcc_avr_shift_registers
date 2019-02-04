@@ -15,5 +15,10 @@ void setIO(TIO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TIO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
 
 void srInit(TSR *sr){
+}
 
+void srSend(TSR *sr){
+	if(sr->sr_typ){
+
+	}
 }
