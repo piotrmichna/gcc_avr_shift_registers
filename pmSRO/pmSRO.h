@@ -30,6 +30,7 @@
 	// definicje pin steruj¹cym zasilaniem modu³u
 	#define OSR0_PWR_PIN PD5 	// zakomentuj jesli niedostepne
 	#define OSR0_PWR_PORT D
+
 #endif
 #ifdef SR_LED
 	// definicja pinu kontrolki led dla modu³u
