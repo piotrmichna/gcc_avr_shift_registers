@@ -16,6 +16,10 @@
 TSR sro;
 uint8_t sro0_pin_buf[OSR0_REG_NUM];
 
+void sroSetBit(uint8_t bit, uint8_t state){
+
+}
+
 void sroInit(void){
 	sro.sr_typ=1;
 	sro.num=OSR0_REG_NUM;
