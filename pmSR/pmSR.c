@@ -100,5 +100,6 @@ void srSend(TSR *sr){
 		}
 		setIO(&sr->rck);
 		resIO(&sr->rck);
+		sr->new_dat=0;
 	}
 }
