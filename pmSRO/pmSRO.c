@@ -85,13 +85,13 @@ void sroInit(void){
 	sro.rck.PORTX= &PORT(OSR0_RCK_PORT);
 	sro.rck.MASK= (1<<OSR0_RCK_PIN);
 
-	#ifdef SR_EN
+	#ifdef OSR0_EN_PIN
 		sro.en.PORTX= &PORT(OSR0_EN_PORT);
 		sro.en.MASK= (1<<OSR0_EN_PIN);
 		DDR(OSR0_EN_PORT) |= (1<<OSR0_EN_PIN);
 		PORT(OSR0_EN_PORT) |= (1<<OSR0_EN_PIN);
 	#endif
-	#ifdef SR_PWR
+	#ifdef OSR0_PWR_PIN
 		sro.pwr.PORTX= &PORT(OSR0_PWR_PORT);
 		sro.pwr.MASK= (1<<OSR0_PWR_PIN);
 		DDR(OSR0_PWR_PORT) |= (1<<OSR0_PWR_PIN);
@@ -101,7 +101,7 @@ void sroInit(void){
 			if(SR_PWR_ON_BIT) PORT(OSR0_PWR_PORT) &= ~(1<<OSR0_PWR_PIN); else PORT(OSR0_PWR_PORT) |= (1<<OSR0_PWR_PIN);
 		#endif
 	#endif
-	#ifdef SR_LED
+	#ifdef OSR0_LED_PIN
 		sro.led.PORTX= &PORT(OSR0_LED_PORT);
 		sro.led.MASK= (1<<OSR0_LED_PIN);
 		DDR(OSR0_LED_PORT) |= (1<<OSR0_LED_PIN);
