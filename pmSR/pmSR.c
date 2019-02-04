@@ -11,11 +11,11 @@
 
 #include "pmSR.h"
 
-uint8_t getIO(TPO *io);
+uint8_t getIO(TPI *io);
 
 void setIO(TPO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TPO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
-uint8_t getIO(TPO *io){
+uint8_t getIO(TPI *io){
 	uint8_t pin=0;
 
 	return pin;
