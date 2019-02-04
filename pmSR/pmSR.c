@@ -15,10 +15,10 @@ uint8_t getIO(TPI *io);
 
 void setIO(TPO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
 void resIO(TPO *io){ if(io->PORTX) *io->PORTX &= ~io->MASK; }
-uint8_t getIO(TPI *io){
-	uint8_t pin=0;
 
-	return pin;
+int8_t getIO(TPI *io){
+	if(!io->PINX) return -1;
+	if(io->PINX & io->MASK) return 1; else return 0;
 }
 
 #ifdef SR_PWR
