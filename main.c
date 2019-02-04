@@ -16,13 +16,16 @@
 
 int main(void){
 	uint8_t cnt=0,n=0;
+	_delay_ms(1000);
 
 	while(1){
 		sroEvent();
 		if(cnt==99){
+			sroResBuf();
 			sroSetBit(n,1);
+			sroSend();
 			n++;
-			if(n>7) n=0;
+			if(n>8) n=0;
 			cnt=0;
 
 		}else{
