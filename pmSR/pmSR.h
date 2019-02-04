@@ -9,16 +9,7 @@
 #ifndef PMSR_PMSR_H_
 #define PMSR_PMSR_H_
 
-#define SR_EN 1		// dostepne sterowanie linia CE rejestru
-#define SR_PWR 1	// dostepne sterowanie linia zasilania rejestru
-#ifdef SR_PWR
-#define SR_PWR_ON_BIT	0	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
-#endif
-
-#define SR_LED 1	// dostepna kotrolka pracy rejestru
-#ifdef SR_LED
-#define SR_LED_ON_BIT	0	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
-#endif
+#include "srDef.h"
 
 
 typedef struct{
