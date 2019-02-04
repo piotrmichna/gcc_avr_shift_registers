@@ -7,3 +7,7 @@
  */
 
 
+#include <avr/io.h>
+#include "../mac.h"
+
+#include "pmSR.h"
