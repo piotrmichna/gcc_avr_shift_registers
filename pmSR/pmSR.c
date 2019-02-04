@@ -45,6 +45,13 @@ void srResPwr(TSR *sr){
 		#else
 			resIO(&sr->pwr);
 		#endif
+		#ifdef SR_LED
+			#ifdef SR_LED_ON_BIT
+				if(sr->led_on) resIO(&sr->led); else setIO(&sr->led);
+			#else
+				resIO(&sr->led);
+			#endif
+		#endif
 		status=0;
 	}
 }
