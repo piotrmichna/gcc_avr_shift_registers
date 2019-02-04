@@ -100,6 +100,22 @@ void srSend(TSR *sr){
 }
 
 void srGet(TSR *sr){
+	if(!sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
+		uint8_t *reg;
+		uint8_t pin;
+
+		setIO(&sr->rck);
+		resIO(&sr->rck);
+
+		reg=sr->pin_buf;
+		for(uint8_t i=0;i<sr->num;i++){
+			if(sr->dir) pin=0x80; else pin=0x01;
+			while(pin){
+
+			}
+		}
+
+	}
 
 }
 
