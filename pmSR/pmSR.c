@@ -99,3 +99,7 @@ void srSend(TSR *sr){
 	}
 }
 
+void srGet(TSR *sr){
+
+}
+
