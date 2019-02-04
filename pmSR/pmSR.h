@@ -31,11 +31,11 @@ typedef struct{
 	TIO led;
 #endif
 	uint8_t *pin_buf;
-	uint8_t num;	// ilosc rejestrow
-	uint8_t sr_typ;	// 1=rejestr wyjsciowy 0=rejestr wejsciowy
-	uint8_t dir;	// kierunek wsuwania bitow
-	uint8_t on_bit;	// bit wlaczany 0 lub 1
-	uint8_t enable;	// 0=wylaczony 1= aktywny
+	uint8_t num		:4;	// ilosc rejestrow
+	uint8_t sr_typ	:1;	// 1=rejestr wyjsciowy 0=rejestr wejsciowy
+	uint8_t dir		:1;	// kierunek wsuwania bitow
+	uint8_t on_bit	:1;	// bit wlaczany 0 lub 1
+	uint8_t enable 	:1;	// 0=wylaczony 1= aktywny
 }TSR;
 
 #endif /* PMSR_PMSR_H_ */
