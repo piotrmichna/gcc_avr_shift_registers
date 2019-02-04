@@ -7,7 +7,7 @@
  */
 
 #include <avr/io.h>
-#include "mac.h"
+#include "../mac.h"
 
 #include "pmSR.h"
 
@@ -22,9 +22,9 @@ uint8_t srSetPwr(TSR *sr){
 	static uint8_t status;
 	if(!status) {
 		#ifdef SR_PWR_ON_BIT
-			if(sr->pwr_on) setIO(sr->pwr); else resIO(sr->pwr);
+			if(sr->pwr_on) setIO(&sr->pwr); else resIO(&sr->pwr);
 		#else
-			setIO(sr->pwr);
+			setIO(&sr->pwr);
 		#endif
 		status++;
 		return 0;
@@ -33,11 +33,19 @@ uint8_t srSetPwr(TSR *sr){
 			status++;
 			return 0;
 		}else{
+			#ifdef SR_LED
+				#ifdef SR_LED_ON_BIT
+					if(sr->led_on) setIO(&sr->led); else resIO(&sr->led);
+				#else
+					setIO(&sr->led);
+				#endif
+			#endif
 			return status;
 		}
 	}
 }
 #endif
+
 void srSend(TSR *sr){
 	if(sr->sr_typ && sr->ser.PORTX && sr->sck.PORTX && sr->rck.PORTX){
 
