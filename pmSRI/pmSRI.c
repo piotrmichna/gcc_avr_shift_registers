@@ -67,3 +67,7 @@ void sriInit(void){
 		PORT(ISR0_SCK_PORT) &= ~(1<<ISR0_SCK_PIN);
 		PORT(ISR0_RCK_PORT) &= ~(1<<ISR0_RCK_PIN);
 }
+uint8_t sriGetByte(void){
+
+
+}
