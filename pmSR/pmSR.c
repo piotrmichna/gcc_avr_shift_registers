@@ -11,6 +11,8 @@
 
 #include "pmSR.h"
 
+void setIO(TIO *io){ if(io->PORTX) *io->PORTX |= io->MASK; }
+
 void srInit(TSR *sr){
 
 }

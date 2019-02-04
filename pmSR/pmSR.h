@@ -38,6 +38,7 @@ typedef struct{
 	uint8_t enable 	:1;	// 0=wylaczony 1= aktywny
 }TSR;
 
+void setIO(TIO *io);
 void srInit(TSR *sr);
 
 #endif /* PMSR_PMSR_H_ */
