@@ -5,5 +5,9 @@
  *      Author: Piotr Michna
  *		e-mail: poczta@piotrmichna.pl
  */
+#include <avr/io.h>
+#include "../mac.h"
+#include "pmSRO.h"
 
+#include "../pmSR/pmSR.h"
 
