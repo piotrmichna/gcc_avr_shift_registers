@@ -139,6 +139,7 @@ void srGet(TSR *sr){
 			}
 			reg++;
 		}
+		sr->new_dat=1;
 	}
 }
 
