@@ -26,6 +26,13 @@ uint8_t sroSetBit(uint8_t bit, uint8_t state){
 	return 1;
 }
 
+uint8_t sroSetByte(uint8_t byte, uint8_t val){
+	if(byte>=sro.num) return 0;
+
+	sro.pin_buf[byte]=val;
+	return 1;
+}
+
 void sroInit(void){
 	sro.sr_typ=1;
 	sro.num=OSR0_REG_NUM;
