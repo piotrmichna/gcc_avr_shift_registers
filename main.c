@@ -23,6 +23,7 @@ int main(void){
 			sroSetBit(n,1);
 			n++;
 			if(n>7) n=0;
+			cnt=0;
 
 		}else{
 			cnt++;
