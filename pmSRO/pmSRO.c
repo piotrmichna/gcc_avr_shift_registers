@@ -30,7 +30,6 @@ uint8_t sroSetBit(uint8_t bit, uint8_t state){
 
 uint8_t sroSetByte(uint8_t byte, uint8_t val){
 	if(byte>=sro.num) return 0;
-
 	sro.pin_buf[byte]=val;
 	return 1;
 }
@@ -95,4 +94,5 @@ void sroInit(void){
 	if(sro.on_bit) PORT(OSR0_SER_PORT) &= ~(1<<OSR0_SER_PIN); else PORT(OSR0_SER_PORT) |= (1<<OSR0_SER_PIN);
 	PORT(OSR0_SCK_PORT) &= ~(1<<OSR0_SCK_PIN);
 	PORT(OSR0_RCK_PORT) &= ~(1<<OSR0_RCK_PIN);
+	sroResBuf();
 }
