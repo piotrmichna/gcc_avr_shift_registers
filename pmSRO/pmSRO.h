@@ -44,6 +44,6 @@
 
 
 void sroInit(void);
-void sroSetBit(uint8_t bit, uint8_t state);
+uint8_t sroSetBit(uint8_t bit, uint8_t state);
 
 #endif /* PMSRO_PMSRO_H_ */
