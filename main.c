@@ -22,7 +22,8 @@ int main(void){
 		sroEvent();
 		if(cnt==99){
 			sroResBuf();
-			sroSetBit(n,1);
+			//sroSetBit(n,1);
+			sroSetByte(0,n);
 			sroSend();
 			n++;
 			if(n>8) n=0;
