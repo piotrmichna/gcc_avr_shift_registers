@@ -18,7 +18,7 @@
 #define SR_PWR_ON_BIT	1	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
 #endif
 #ifdef SR_LED
-#define SR_LED_ON_BIT	0	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
+#define SR_LED_ON_BIT	1	// zakomentuj jesli sterwanie pinem zgodny z ustawianiem stanu pinu rejestru
 #endif
 
 #endif /* PMSR_SRDEF_H_ */
