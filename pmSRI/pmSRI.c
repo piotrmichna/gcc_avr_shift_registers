@@ -14,12 +14,12 @@
 TSR sri;
 uint8_t sri0_pin_buf[ISR0_REG_NUM];
 
-void (*sriNew)(uint8_t);
+void (*sriNew)(uint8_t id, uint8_t val);
 
 void sriInit(void);
 
 
-void sriRegisterUpdate(void (*cal)(uint8_t)){
+void sriRegisterUpdate(void (*cal)(uint8_t id, uint8_t val)){
 	sriNew=cal;
 }
 
@@ -122,6 +122,7 @@ void sriEvent(void){
 			if( (*reg & (1<<pin)) != (pin_buf[i] & (1<<pin)) ){
 				if( (*reg & (1<<pin)) ) pin_buf[i] |= (1<<pin); else  pin_buf[i] &= ~(1<<pin);
 				// wywolanie zarejstrowanej funkcji zrwacajacej id bitu zmienionego
+				if(sriNew) sriNew(id, (*reg & (1<<pin)) );
 			}
 			id++;
 			pin<<=1;

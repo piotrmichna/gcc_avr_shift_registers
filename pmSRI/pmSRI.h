@@ -47,6 +47,6 @@ uint8_t sirGetNum(void);
 void sriEvent(void);
 void sriTest(void);
 
-void sriRegisterUpdate(void (*cal)(uint8_t));
+void sriRegisterUpdate(void (*cal)(uint8_t id, uint8_t val));
 
 #endif /* PMSRI_PMSRI_H_ */
