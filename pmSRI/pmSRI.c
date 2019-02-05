@@ -74,6 +74,9 @@ void sriInit(void){
 		if(sri.on_bit) PORT(ISR0_SER_PORT) &= ~(1<<ISR0_SER_PIN); else PORT(ISR0_SER_PORT) |= (1<<ISR0_SER_PIN);
 		PORT(ISR0_SCK_PORT) &= ~(1<<ISR0_SCK_PIN);
 		PORT(ISR0_RCK_PORT) &= ~(1<<ISR0_RCK_PIN);
+		for(uint8_t i=0;i<sri.num;i++){
+			if(ISR0_ON_BIT_STATE)sri.pin_buf[i]=0; else sri.pin_buf[i]=255;
+		}
 }
 uint8_t sriGetByte(uint8_t id){
 	if (id<sri.num){
@@ -98,6 +101,9 @@ void sriEvent(void){
 		#ifdef ISR0_EN_PIN
 			resIO(&sri.en);
 		#endif
+		for(uint8_t i=0;i<sri.num;i++){
+			if(ISR0_ON_BIT_STATE)pin_buf[i]=0; else pin_buf[i]=255;
+		}
 		sri.enable=1;
 	}
 	srGet(&sri);

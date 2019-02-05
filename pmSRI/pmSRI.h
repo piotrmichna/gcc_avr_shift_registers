@@ -12,7 +12,7 @@
 #include "../pmSR/srDef.h"
 
 #define ISR0_REG_NUM 1		// 1...7 ilosc obslugiwanych rejestrow przesownych
-#define ISR0_ON_BIT_STATE 1
+#define ISR0_ON_BIT_STATE 0
 #define ISR0_DIR_0_7 0		// kierunek wsuwania bitow
 
 
