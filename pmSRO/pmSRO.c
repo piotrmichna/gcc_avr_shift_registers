@@ -75,6 +75,7 @@ void sroInit(void){
 	sro.on_bit = OSR0_ON_BIT_STATE;
 	sro.dir=OSR0_DIR_0_7;
 	sro.enable=0;
+	sro.new_dat=0;
 
 	sro.ser.PORTX= &PORT(OSR0_SER_PORT);
 	sro.ser.MASK= (1<<OSR0_SER_PIN);
