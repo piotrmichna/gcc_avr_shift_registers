@@ -50,7 +50,7 @@ void sroResBuf(void){
 #endif
 	}
 }
-#if SRO_AUTO_SEND == 1
+#if SRO_AUTO_SEND == 0
 	void sroSend(void){
 		sro.new_dat=1;
 	}
