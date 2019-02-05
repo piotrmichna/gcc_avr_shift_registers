@@ -78,7 +78,7 @@ uint8_t sirGetNum(void){
 }
 
 void sriEvent(void){
-	static uint8_t pin_buf[ISR0_REG_NUM];
+
 	if(!sri.pin_buf){
 		sriInit();
 		return;
@@ -97,5 +97,5 @@ void sriEvent(void){
 
 }
 void sriTest(void){
-
+	static uint8_t pin_buf[ISR0_REG_NUM];
 }
