@@ -10,7 +10,6 @@
 #include "pmSRI.h"
 
 #include "../pmSR/pmSR.h"
-#include "../pmUART/pmuart.h"
 
 TSR sri;
 uint8_t sri0_pin_buf[ISR0_REG_NUM];
@@ -26,7 +25,6 @@ void sriRegisterUpdate(void (*cal)(uint8_t id, uint8_t val)){
 
 
 void sriInit(void){
-	uart_puts("sriInit\r\n");
 		sri.sr_typ=0;
 		sri.num=ISR0_REG_NUM;
 		sri.pin_buf=sri0_pin_buf;
@@ -124,19 +122,12 @@ void sriEvent(void){
 			if( (*reg & pin) != (pin_buf[i] & pin) ){
 				if( (*reg & pin) ) pin_buf[i] |= pin; else  pin_buf[i] &= ~pin;
 				// wywolanie zarejstrowanej funkcji zrwacajacej id bitu zmienionego
-
 				if(sriNew) sriNew(id, (*reg & pin) );
-				uart_puts("id=");
-													uart_putint(i,10);
-													uart_puts(", ");
-													uart_putint(sri.pin_buf[0], 2);
-													uart_puts("\r\n");
 			}
 
 			id++;
 			pin<<=1;
 		}
-
 		reg++;
 	}
 }

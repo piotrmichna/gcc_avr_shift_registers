@@ -42,10 +42,10 @@ int main(void){
 
 void setPk(uint8_t id, uint8_t val){
 	flag=1;
-	uart_puts("setPk");
-//	uart_putint(id,10);
-//	uart_puts(", ");
-//	uart_putint(val, 10);
+	uart_puts("detekcja__ ");
+	uart_putint(id,10);
+	uart_puts(", ");
+	uart_putint(val, 2);
 	uart_puts("\r\n");
 
 	sroSetBit(id, val);
