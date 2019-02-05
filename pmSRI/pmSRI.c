@@ -10,6 +10,7 @@
 #include "pmSRI.h"
 
 #include "../pmSR/pmSR.h"
+#include "../pmUART/pmuart.h"
 
 TSR sri;
 uint8_t sri0_pin_buf[ISR0_REG_NUM];
@@ -25,6 +26,7 @@ void sriRegisterUpdate(void (*cal)(uint8_t id, uint8_t val)){
 
 
 void sriInit(void){
+	uart_puts("sriInit\r\n");
 		sri.sr_typ=0;
 		sri.num=ISR0_REG_NUM;
 		sri.pin_buf=sri0_pin_buf;
@@ -33,7 +35,7 @@ void sriInit(void){
 		sri.enable=0;
 
 		sri.seri.PINX= &PIN(ISR0_SER_PORT);
-		sri.ser.MASK= (1<<ISR0_SER_PIN);
+		sri.seri.MASK= (1<<ISR0_SER_PIN);
 
 		sri.sck.PORTX= &PORT(ISR0_SCK_PORT);
 		sri.sck.MASK= (1<<ISR0_SCK_PIN);
@@ -74,9 +76,9 @@ void sriInit(void){
 		if(sri.on_bit) PORT(ISR0_SER_PORT) &= ~(1<<ISR0_SER_PIN); else PORT(ISR0_SER_PORT) |= (1<<ISR0_SER_PIN);
 		PORT(ISR0_SCK_PORT) &= ~(1<<ISR0_SCK_PIN);
 		PORT(ISR0_RCK_PORT) &= ~(1<<ISR0_RCK_PIN);
-		for(uint8_t i=0;i<sri.num;i++){
-			if(ISR0_ON_BIT_STATE)sri.pin_buf[i]=0; else sri.pin_buf[i]=255;
-		}
+//		for(uint8_t i=0;i<sri.num;i++){
+//			if(ISR0_ON_BIT_STATE)sri.pin_buf[i]=0; else sri.pin_buf[i]=255;
+//		}
 }
 uint8_t sriGetByte(uint8_t id){
 	if (id<sri.num){
@@ -92,6 +94,7 @@ void sriEvent(void){
 	static uint8_t pin_buf[ISR0_REG_NUM];
 	if(!sri.pin_buf){
 		sriInit();
+
 		return;
 	}
 	if(!sri.enable){
@@ -101,23 +104,16 @@ void sriEvent(void){
 		#ifdef ISR0_EN_PIN
 			resIO(&sri.en);
 		#endif
-		for(uint8_t i=0;i<sri.num;i++){
-			if(ISR0_ON_BIT_STATE)pin_buf[i]=0; else pin_buf[i]=255;
-		}
+//		for(uint8_t i=0;i<sri.num;i++){
+//			if(ISR0_ON_BIT_STATE)pin_buf[i]=0; else pin_buf[i]=255;
+//		}
 		sri.enable=1;
+		srSetLed(&sri);
 	}
+
 	srGet(&sri);
 
-	if(!sri.enable){
-		#ifdef ISR0_PWR_PIN
-			if(!srSetPwr(&sri)) return;
-		#endif
-		#ifdef ISR0_EN_PIN
-			resIO(&sri.en);
-		#endif
-		sri.enable=1;
-	}
-	srGet(&sri);
+
 
 	uint8_t id=0, pin;
 	uint8_t *reg;
@@ -125,14 +121,22 @@ void sriEvent(void){
 	for(uint8_t i=0;i<sri.num;i++){
 		pin=0x01;
 		while(pin){
-			if( (*reg & (1<<pin)) != (pin_buf[i] & (1<<pin)) ){
-				if( (*reg & (1<<pin)) ) pin_buf[i] |= (1<<pin); else  pin_buf[i] &= ~(1<<pin);
+			if( (*reg & pin) != (pin_buf[i] & pin) ){
+				if( (*reg & pin) ) pin_buf[i] |= pin; else  pin_buf[i] &= ~pin;
 				// wywolanie zarejstrowanej funkcji zrwacajacej id bitu zmienionego
-				if(sriNew) sriNew(id, (*reg & (1<<pin)) );
+
+				if(sriNew) sriNew(id, (*reg & pin) );
+				uart_puts("id=");
+													uart_putint(i,10);
+													uart_puts(", ");
+													uart_putint(sri.pin_buf[0], 2);
+													uart_puts("\r\n");
 			}
+
 			id++;
 			pin<<=1;
 		}
+
 		reg++;
 	}
 }
