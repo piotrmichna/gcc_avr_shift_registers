@@ -79,5 +79,20 @@ uint8_t sirGetNum(void){
 
 void sriEvent(void){
 	static uint8_t pin_buf[ISR0_REG_NUM];
+	if(!sri.pin_buf){
+		sriInit();
+		return;
+	}
+	if(!sri.enable){
+		#ifdef ISR0_PWR_PIN
+			if(!srSetPwr(&sri)) return;
+		#endif
+		#ifdef ISR0_EN_PIN
+			resIO(&sri.en);
+		#endif
+		sri.enable=1;
+	}
+	srGet(&sri);
+
 
 }
