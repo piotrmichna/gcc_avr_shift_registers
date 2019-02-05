@@ -47,7 +47,9 @@
 uint8_t sroSetBit(uint8_t bit, uint8_t state);
 uint8_t sroSetByte(uint8_t byte, uint8_t val);
 void sroResBuf(void);
-void sroSend(void);
-void sroEvent(void);
 
+void sroEvent(void);
+#if SRO_AUTO_SEND == 1
+void sroSend(void);
+#endif
 #endif /* PMSRO_PMSRO_H_ */
