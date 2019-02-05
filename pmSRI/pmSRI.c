@@ -14,8 +14,15 @@
 TSR sri;
 uint8_t sri0_pin_buf[ISR0_REG_NUM];
 
+void (*sriNew)(uint8_t);
 
 void sriInit(void);
+
+
+void sriRegisterUpdate(void (*cal)(uint8_t)){
+	sriNew=cal;
+}
+
 
 void sriInit(void){
 		sri.sr_typ=0;
