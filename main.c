@@ -11,28 +11,30 @@
 #include <util/delay.h>
 
 #include "pmSRO/pmSRO.h"
+#include "pmSRI/pmSRI.h"
 
+//uint8_t sri_buf[ISR0_REG_NUM];
+uint8_t flag=0;
 
+void setPk(uint8_t id, uint8_t val);
 
 int main(void){
-	uint8_t cnt=0,n=0;
-	_delay_ms(1000);
+
+	_delay_ms(3000);
+	sriRegisterUpdate(setPk);
 
 	while(1){
 		sroEvent();
-		if(cnt==99){
-			sroResBuf();
-			//sroSetBit(n,1);
-			sroSetByte(0,n);
-			sroSend();
-			n++;
-			if(n>8) n=0;
-			cnt=0;
+		sriEvent();
 
-		}else{
-			cnt++;
-		}
-
+		if(flag) sroSend();
+		flag=0;
 		_delay_ms(10);
 	}
+}
+
+
+void setPk(uint8_t id, uint8_t val){
+	flag=1;
+	sroSetBit(id, val);
 }
