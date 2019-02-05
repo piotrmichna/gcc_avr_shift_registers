@@ -42,4 +42,9 @@
 	#define ISR0_EN_PORT C
 #endif
 
+uint8_t sriGetByte(uint8_t id);
+uint8_t sirGetNum(void);
+void sriEvent(void);
+void sriTest(void);
+
 #endif /* PMSRI_PMSRI_H_ */

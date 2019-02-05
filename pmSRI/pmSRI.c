@@ -14,6 +14,7 @@
 TSR sri;
 uint8_t sri0_pin_buf[ISR0_REG_NUM];
 
+
 void sriInit(void);
 
 void sriInit(void){
@@ -66,4 +67,58 @@ void sriInit(void){
 		if(sri.on_bit) PORT(ISR0_SER_PORT) &= ~(1<<ISR0_SER_PIN); else PORT(ISR0_SER_PORT) |= (1<<ISR0_SER_PIN);
 		PORT(ISR0_SCK_PORT) &= ~(1<<ISR0_SCK_PIN);
 		PORT(ISR0_RCK_PORT) &= ~(1<<ISR0_RCK_PIN);
+}
+uint8_t sriGetByte(uint8_t id){
+	if (id<sri.num){
+		return sri.pin_buf[id];
+	}else return 0;
+}
+uint8_t sirGetNum(void){
+	return sri.num;
+}
+
+void sriEvent(void){
+
+	static uint8_t pin_buf[ISR0_REG_NUM];
+	if(!sri.pin_buf){
+		sriInit();
+		return;
+	}
+	if(!sri.enable){
+		#ifdef ISR0_PWR_PIN
+			if(!srSetPwr(&sri)) return;
+		#endif
+		#ifdef ISR0_EN_PIN
+			resIO(&sri.en);
+		#endif
+		sri.enable=1;
+	}
+	srGet(&sri);
+
+	if(!sri.enable){
+		#ifdef ISR0_PWR_PIN
+			if(!srSetPwr(&sri)) return;
+		#endif
+		#ifdef ISR0_EN_PIN
+			resIO(&sri.en);
+		#endif
+		sri.enable=1;
+	}
+	srGet(&sri);
+
+	uint8_t id=0, pin;
+	uint8_t *reg;
+	reg=sri.pin_buf;
+	for(uint8_t i=0;i<sri.num;i++){
+		pin=0x01;
+		while(pin){
+			if( (*reg & (1<<pin)) != (pin_buf[i] & (1<<pin)) ){
+				if( (*reg & (1<<pin)) ) pin_buf[i] |= (1<<pin); else  pin_buf[i] &= ~(1<<pin);
+				// wywolanie zarejstrowanej funkcji zrwacajacej id bitu zmienionego
+			}
+			id++;
+			pin<<=1;
+		}
+		reg++;
+	}
 }
