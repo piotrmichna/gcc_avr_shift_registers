@@ -122,7 +122,9 @@ void sriEvent(void){
 			if( (*reg & pin) != (pin_buf[i] & pin) ){
 				if( (*reg & pin) ) pin_buf[i] |= pin; else  pin_buf[i] &= ~pin;
 				// wywolanie zarejstrowanej funkcji zrwacajacej id bitu zmienionego
-				if(sriNew) sriNew(id, (*reg & pin) );
+				if(sriNew){
+					if( (*reg & pin) ) sriNew(id,1); else sriNew(id,0);
+				}
 			}
 
 			id++;
