@@ -76,3 +76,7 @@ uint8_t sriGetByte(uint8_t id){
 uint8_t sirGetNum(void){
 	return sri.num;
 }
+
+void sriEvent(void){
+
+}

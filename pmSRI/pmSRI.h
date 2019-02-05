@@ -44,5 +44,6 @@
 
 uint8_t sriGetByte(uint8_t id);
 uint8_t sirGetNum(void);
+void sriEvent(void);
 
 #endif /* PMSRI_PMSRI_H_ */
