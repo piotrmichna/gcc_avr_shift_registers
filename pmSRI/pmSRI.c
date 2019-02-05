@@ -13,7 +13,7 @@
 
 TSR sri;
 uint8_t sri0_pin_buf[ISR0_REG_NUM];
-uint8_t sri0_pin_buf_last[ISR0_REG_NUM];
+
 
 void sriInit(void);
 
@@ -78,5 +78,6 @@ uint8_t sirGetNum(void){
 }
 
 void sriEvent(void){
+	static uint8_t pin_buf[ISR0_REG_NUM];
 
 }
