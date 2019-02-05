@@ -94,5 +94,19 @@ void sriEvent(void){
 	}
 	srGet(&sri);
 
-
+	uint8_t id=0, pin;
+	uint8_t *reg;
+	reg=sri.pin_buf;
+	for(uint8_t i=0;i<sri.num;i++){
+		pin=0x01;
+		while(pin){
+			if( (*reg & (1<<pin)) != (pin_buf[i] & (1<<pin)) ){
+				if( (*reg & (1<<pin)) ) pin_buf[i] |= (1<<pin); else  pin_buf[i] &= ~(1<<pin);
+				// wywolanie zarejstrowanej funkcji zrwacajacej id bitu zmienionego
+			}
+			id++;
+			pin<<=1;
+		}
+		reg++;
+	}
 }
